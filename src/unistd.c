@@ -1,5 +1,5 @@
-#include "syscall.h"
-#include "stddef.h"
+#include "unistd.h"
+#include <stddef.h>
 
 int write(const char *file, const char *s, size_t n)
 {
@@ -9,6 +9,7 @@ int write(const char *file, const char *s, size_t n)
                 "a"(0), "b"(file), "c"(s), "d"(n)
         );
 
-        register int ret __asm__("rax");
+        int ret = 0;
+        __asm__ volatile ("" : "=a"(ret));
         return ret;
 }

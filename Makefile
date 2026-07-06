@@ -12,7 +12,6 @@ CFLAGS := -ffreestanding \
 	-mno-red-zone \
 	-Wall \
 	-Wextra \
-	-nostdinc \
 	-Iinclude \
 	-std=c23 \
 	-nostdlib

@@ -1,3 +1,5 @@
 /build/
 /.vscode/
 /sysroot/
+/compile_commands.json
+/.cache/
