@@ -13,7 +13,7 @@ CFLAGS := -ffreestanding \
 	-Wall \
 	-Wextra \
 	-Iinclude \
-	-std=c23 \
+	-std=c99 \
 	-nostdlib
 
 SRC := src

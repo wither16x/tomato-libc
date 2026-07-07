@@ -2,4 +2,5 @@
 
 #include <stddef.h>
 
-int write(const char *file, const char *s, size_t n);
+int write(const char *file, const void *buf, size_t n);
+int read(const char *file, void *buf, size_t n);
