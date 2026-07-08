@@ -125,11 +125,22 @@ int getchar()
 /* ------------------------------------------------------------------------------------------------- */
 char *fgets(char *restrict str, int count, const char *restrict stream)
 {
-        int res = read(stream, str, count);
-        if (res < 0)
-                return NULL;
-        str[count - 1] = '\0';
-        return str;
+        int ch = 0;
+        int i = 0;
+
+        if (count <= 0)
+                return str;
+
+        while (i < count - 1 && ((ch = fgetc(stream)))) {
+                str[i++] = ch;
+                if (ch == '\n')
+                        break;
+        }
+        str[i] = '\0';
+
+        if (i > 0)
+                return str;
+        return NULL;
 }
 /* ------------------------------------------------------------------------------------------------- */
 
