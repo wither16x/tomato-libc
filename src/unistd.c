@@ -1,6 +1,8 @@
 #include "unistd.h"
 #include <stddef.h>
 
+#define GET_SYS_RETVAL(var) __asm__ volatile ("" : "=a"(var))
+
 /* ------------------------------------------------------------------------------------------------- */
 int write(const char *file, const void *buf, size_t n)
 {
@@ -11,7 +13,7 @@ int write(const char *file, const void *buf, size_t n)
         );
 
         int ret = 0;
-        __asm__ volatile ("" : "=a"(ret));
+        GET_SYS_RETVAL(ret);
         return ret;
 }
 /* ------------------------------------------------------------------------------------------------- */
@@ -26,7 +28,22 @@ int read(const char *file, void *buf, size_t n)
         );
         
         int ret = 0;
-        __asm__ volatile ("" : "=a"(ret));
+        GET_SYS_RETVAL(ret);
+        return ret;
+}
+/* ------------------------------------------------------------------------------------------------- */
+
+/* ------------------------------------------------------------------------------------------------- */
+int exec(const char *file)
+{
+        __asm__ volatile (
+                "int $0x80"
+                ::
+                "a"(2), "b"(file)
+        );
+
+        int ret = 0;
+        GET_SYS_RETVAL(ret);
         return ret;
 }
 /* ------------------------------------------------------------------------------------------------- */

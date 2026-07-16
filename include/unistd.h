@@ -4,3 +4,4 @@
 
 int write(const char *file, const void *buf, size_t n);
 int read(const char *file, void *buf, size_t n);
+int exec(const char *file);

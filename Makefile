@@ -1,4 +1,6 @@
 PREFIX := x86_64-radishos
+# change if needed
+LIBC_PREFIX := \$(HOME)/.local
 
 NASM := nasm
 CC := $(PREFIX)-clang
@@ -26,7 +28,7 @@ C_OBJS := $(patsubst $(SRC)/%, $(BUILD)/%, $(C_SRCS:.c=.o))
 OBJS := $(ASM_OBJS) $(C_OBJS)
 TARGET := $(BUILD)/libc.a
 
-.PHONY: all clean
+.PHONY: all clean re install build-install
 
 all: $(TARGET)
 
@@ -43,3 +45,11 @@ $(BUILD)/%.o: $(SRC)/%.asm
 
 clean:
 	rm -rf $(BUILD)
+
+re: clean all
+
+install:
+	./mksysroot.sh
+	./install.sh $(LIBC_PREFIX)
+
+build-install: re install
