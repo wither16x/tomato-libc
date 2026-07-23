@@ -4,8 +4,8 @@
 
 ## Headers
 ### [`unistd.h`](include/unistd.h)
-- `write()`
-- `read()`
+- `write()`, `read()`
+- `exec()`, `fork()`, `exit()`, `wait()`, `getpid()`
 
 ### [`stdio.h`](include/stdio.h)
 - `fputc()`, `putchar()`

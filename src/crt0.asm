@@ -7,6 +7,9 @@ extern main
 _start:
         call main
 
-; TODO: syscall exit
+        mov rax, 4
+        int 0x80
+        
+; should never be reached
 hang:
         jmp hang
