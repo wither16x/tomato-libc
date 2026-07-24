@@ -2,6 +2,28 @@
 
 **Tomato** is a C library (libc) targeting C99 developed for [**the Radish Operating System** (RadishOS)](https://github.com/wither16x/radish_os).
 
+## How to build
+**Step 1:** clone the repository
+```sh
+git clone https://github.com/wither16x/tomato-libc
+```
+**Step 2:** build the sources
+```sh
+make # run make clean before if it does not work
+```
+**Step 3:** create the sysroot
+```sh
+./mksysroot.sh
+```
+**Step 4 (optional):** install the sysroot somewhere
+```sh
+# Note that the target directory must contain:
+# * ./usr/
+# * ./usr/include/
+# * ./usr/lib
+./install.sh <directory>
+```
+
 ## Headers
 ### [`unistd.h`](include/unistd.h)
 - `pid_t`
