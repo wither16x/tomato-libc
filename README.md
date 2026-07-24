@@ -4,6 +4,7 @@
 
 ## Headers
 ### [`unistd.h`](include/unistd.h)
+- `pid_t`
 - `write()`, `read()`
 - `exec()`, `fork()`, `exit()`, `wait()`, `getpid()`
 
