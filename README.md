@@ -29,6 +29,7 @@ make # run make clean before if it does not work
 - `pid_t`
 - `write()`, `read()`
 - `exec()`, `fork()`, `exit()`, `wait()`, `getpid()`
+- `open()`, `close()`
 
 ### [`stdio.h`](include/stdio.h)
 - `fputc()`, `putchar()`
@@ -59,3 +60,6 @@ make # run make clean before if it does not work
 - Unsigned least types
 - Integer limit macros
 - Literal macros
+
+### [`stdlib.h`](include/stdlib.h)
+- `malloc()` (stub), `free()` (stub)
