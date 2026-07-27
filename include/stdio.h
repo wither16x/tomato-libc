@@ -1,18 +1,29 @@
 #pragma once
 
 #include <stdarg.h>
+#include <stddef.h>
 
 /// We use const char * for streams since RadishOS does not have complex
 /// file structures yet, and no streams/file descriptors support.
 
-int fputc(int c, const char *stream);
+typedef struct FILE {
+        size_t fd;
+} FILE;
+
+FILE *fopen(const char *restrict path);
+int fclose(FILE *stream);
+
+int fputc(int c, FILE *stream);
 int putchar(int c);
 
-int fgetc(const char *stream);
+int fgetc(FILE *stream);
 int getchar();
-char *fgets(char *restrict str, int count, const char *restrict stream);
+char *fgets(char *restrict str, int count, FILE *stream);
 
-int vfprintf(const char *restrict stream, const char *restrict format, va_list arg);
+int vfprintf(FILE *stream, const char *restrict format, va_list arg);
 int vprintf(const char *restrict format, va_list arg);
-int fprintf(const char *restrict stream, const char *restrict format, ...);
+int fprintf(FILE *stream, const char *restrict format, ...);
 int printf(const char *restrict format, ...);
+
+extern FILE *stdin;
+extern FILE *stdout;

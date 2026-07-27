@@ -2,12 +2,13 @@
 #include "unistd.h"
 #include "string.h"
 #include "stdbool.h"
+#include "stdlib.h"
 #include <stddef.h>
 
 /* ------------------------------------------------------------------------------------------------- */
-static int fprints(const char *s, const char *stream)
+static int fprints(const char *s, FILE *stream)
 {
-        return write(stream, (const void *)s, strlen(s));
+        return write(stream->fd, (const void *)s, strlen(s));
 }
 /* ------------------------------------------------------------------------------------------------- */
 
@@ -92,24 +93,49 @@ static char *utoa(size_t n, char *buf, int base)
 /* ------------------------------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------------------------------- */
-int fputc(int c, const char *stream)
+FILE *fopen(const char *restrict path)
 {
-        return write(stream, (const void *)&c, 1);
+        int fd = open(path);
+
+        FILE *f = malloc(sizeof(*f));
+        if (!f)
+                return NULL;
+        f->fd = fd;
+
+        return f;
+}
+/* ------------------------------------------------------------------------------------------------- */
+
+/* ------------------------------------------------------------------------------------------------- */
+int fclose(FILE *stream)
+{
+        if (!stream)
+                return -1;
+        int result = close(stream->fd);
+        free(stream);
+        return result;
+}
+/* ------------------------------------------------------------------------------------------------- */
+
+/* ------------------------------------------------------------------------------------------------- */
+int fputc(int c, FILE *stream)
+{
+        return write(stream->fd, (const void *)&c, 1);
 }
 /* ------------------------------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------------------------------- */
 int putchar(int c)
 {
-        return write("D:/console", (const void *)&c, 1);
+        return write(stdout->fd, (const void *)&c, 1);
 }
 /* ------------------------------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------------------------------- */
-int fgetc(const char *stream)
+int fgetc(FILE *stream)
 {
         int c = 0;
-        if (read(stream, &c, 1) < 0)
+        if (read(stream->fd, &c, 1) < 0)
                 return -1;
         return c;
 }
@@ -118,12 +144,12 @@ int fgetc(const char *stream)
 /* ------------------------------------------------------------------------------------------------- */
 int getchar()
 {
-        return fgetc("D:/input");
+        return fgetc(stdin);
 }
 /* ------------------------------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------------------------------- */
-char *fgets(char *restrict str, int count, const char *restrict stream)
+char *fgets(char *restrict str, int count, FILE *stream)
 {
         int ch = 0;
         int i = 0;
@@ -145,14 +171,14 @@ char *fgets(char *restrict str, int count, const char *restrict stream)
 /* ------------------------------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------------------------------- */
-int vfprintf(const char *restrict stream, const char *restrict format, va_list arg)
+int vfprintf(FILE *stream, const char *restrict format, va_list arg)
 {
         char buf[65];
         int res = 0;
 
         while (*format) {
                 if (*format != '%') {
-                        res = write(stream, &*format, sizeof(*format));
+                        res = write(stream->fd, &*format, sizeof(*format));
                         if (res < 0)
                                 return res;
                         format++;
@@ -236,13 +262,13 @@ int vfprintf(const char *restrict stream, const char *restrict format, va_list a
 /* ------------------------------------------------------------------------------------------------- */
 int vprintf(const char *restrict format, va_list arg)
 {
-        int res = vfprintf("D:/console", format, arg);
+        int res = vfprintf(stdout, format, arg);
         return res;
 }
 /* ------------------------------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------------------------------- */
-int fprintf(const char *restrict stream, const char *restrict format, ...)
+int fprintf(FILE *stream, const char *restrict format, ...)
 {
         va_list args;
         va_start(args, format);
