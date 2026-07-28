@@ -157,8 +157,14 @@ char *fgets(char *restrict str, int count, FILE *stream)
         if (count <= 0)
                 return str;
 
-        while (i < count - 1 && ((ch = fgetc(stream)))) {
+        while (i < count - 1) {
+                ch = fgetc(stream);
+
+                if (ch < 0)
+                        break;
+
                 str[i++] = ch;
+                
                 if (ch == '\n')
                         break;
         }
