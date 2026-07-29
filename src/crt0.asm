@@ -1,7 +1,7 @@
 [bits 64]
 
 section .text
-global _start, stdin_fd, stdout_fd
+global _start
 extern main, tomato_init, tomato_end
 
 _start:
