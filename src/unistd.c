@@ -1,6 +1,10 @@
 #include "unistd.h"
 #include <stddef.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define GET_SYS_RETVAL(var)     __asm__ volatile ("" : "=a"(var))
 #define START_SYSCALL(n)        __asm__ volatile ( "int $0x80" :: "a"(n),
 #define END_SYSCALL             );
@@ -133,3 +137,7 @@ int close(int fd)
         return ret;
 }
 /* ------------------------------------------------------------------------------------------------- */
+
+#ifdef __cplusplus
+}
+#endif

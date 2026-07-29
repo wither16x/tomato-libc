@@ -5,6 +5,10 @@
 #include "stdlib.h"
 #include <stddef.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* ------------------------------------------------------------------------------------------------- */
 static int fprints(const char *s, FILE *stream)
 {
@@ -294,3 +298,7 @@ int printf(const char *restrict format, ...)
         return res;
 }
 /* ------------------------------------------------------------------------------------------------- */
+
+#ifdef __cplusplus
+}
+#endif

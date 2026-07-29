@@ -4,6 +4,10 @@
 
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #if !defined(__TINYC__) && defined(__has_include_next)
 #if __has_include_next(<stdint.h>)
 #define HAVE_COMPILER_STDINT
@@ -182,5 +186,9 @@ typedef __SIZE_TYPE__    uintptr_t;
 #define UINT32_C(x)	x ## U
 #define UINT64_C(x)	x ## ULL
 #define UINTMAX_C(x)	UINT64_C(x)
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

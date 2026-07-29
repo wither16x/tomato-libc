@@ -3,8 +3,9 @@
 #include <stdarg.h>
 #include <stddef.h>
 
-/// We use const char * for streams since RadishOS does not have complex
-/// file structures yet, and no streams/file descriptors support.
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct FILE {
         size_t fd;
@@ -27,3 +28,7 @@ int printf(const char *restrict format, ...);
 
 extern FILE *stdin;
 extern FILE *stdout;
+
+#ifdef __cplusplus
+}
+#endif

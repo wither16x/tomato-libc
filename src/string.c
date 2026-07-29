@@ -1,6 +1,10 @@
 #include "string.h"
 #include "stdint.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* ------------------------------------------------------------------------------------------------- */
 size_t strlen(const char *s)
 {
@@ -68,3 +72,7 @@ int memcmp(const void *s1, const void *s2, size_t n)
         return 0;
 }
 /* ------------------------------------------------------------------------------------------------- */
+
+#ifdef __cplusplus
+}
+#endif

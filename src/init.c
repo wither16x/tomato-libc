@@ -1,6 +1,10 @@
 #include "stdio.h"
 #include "unistd.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 static FILE __stdin_file;
 static FILE __stdout_file;
 FILE *stdin = &__stdin_file;
@@ -19,3 +23,7 @@ void tomato_end()
 {
         exit();
 }
+
+#ifdef __cplusplus
+}
+#endif

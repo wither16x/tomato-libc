@@ -1,5 +1,5 @@
+# change both macros below if needed
 PREFIX := x86_64-radishos
-# change if needed
 LIBC_PREFIX := \$(HOME)/.local
 
 NASM := nasm
