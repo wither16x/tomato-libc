@@ -22,7 +22,8 @@ enum syscall_type {
         SYS_GETPID,
         SYS_WAIT,
         SYS_OPEN,
-        SYS_CLOSE
+        SYS_CLOSE,
+        SYS_LASTPG
 };
 
 /* ------------------------------------------------------------------------------------------------- */
@@ -133,6 +134,19 @@ int close(int fd)
         END_SYSCALL
 
         int ret = 0;
+        GET_SYS_RETVAL(ret);
+        return ret;
+}
+/* ------------------------------------------------------------------------------------------------- */
+
+/* ------------------------------------------------------------------------------------------------- */
+void *lastpg(int pages)
+{
+        START_SYSCALL(SYS_LASTPG)
+                RBX(pages)
+        END_SYSCALL
+
+        void *ret = NULL;
         GET_SYS_RETVAL(ret);
         return ret;
 }

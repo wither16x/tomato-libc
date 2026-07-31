@@ -17,6 +17,7 @@ int getpid(void);
 int wait(void);
 int open(const char *path);
 int close(int fd);
+void *lastpg(int pages);
 
 #ifdef __cplusplus
 }
