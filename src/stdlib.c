@@ -1,6 +1,7 @@
 #include "stdlib.h"
 #include "unistd.h"
 #include "stdio.h"
+#include "string.h"
 #include <stddef.h>
 
 // The RadishOS kernel only supports 4KiB pages
@@ -117,6 +118,36 @@ void *malloc(size_t size)
         }
 
         return (void *)((char *)block + sizeof(struct heap_block));
+}
+
+void *calloc(size_t num, size_t size)
+{
+        size_t sz = num * size;
+        void *p = malloc(sz);
+        if (!p)
+                return NULL;
+
+        memset(p, 0, sz);
+        return p;
+}
+
+void *realloc(void *ptr, size_t new_size)
+{
+        if (!ptr)
+                return malloc(new_size);
+
+        struct heap_block *block = (struct heap_block *)ptr;
+        if (block->size >= new_size)
+                return ptr;
+
+        void *new_ptr = malloc(new_size);
+        if (!new_ptr)
+                return NULL;
+
+        memcpy(new_ptr, ptr, block->size);
+        free(ptr);
+
+        return new_ptr;
 }
 
 void free(void *ptr)
