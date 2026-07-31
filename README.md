@@ -64,4 +64,5 @@ make # run make clean before if it does not work
 - Literal macros
 
 ### [`stdlib.h`](include/stdlib.h)
-- `malloc()`, `free()`
+- `malloc()`, `calloc()`, `realloc()`
+- `free()`
