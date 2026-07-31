@@ -30,6 +30,7 @@ make # run make clean before if it does not work
 - `write()`, `read()`
 - `exec()`, `fork()`, `exit()`, `wait()`, `getpid()`
 - `open()`, `close()`
+- `lastpg()`
 
 ### [`stdio.h`](include/stdio.h)
 - `fputc()`, `putchar()`
@@ -62,4 +63,4 @@ make # run make clean before if it does not work
 - Literal macros
 
 ### [`stdlib.h`](include/stdlib.h)
-- `malloc()` (stub), `free()` (stub)
+- `malloc()`, `free()`
