@@ -37,6 +37,7 @@ make # run make clean before if it does not work
 - `fgetc()`, `getchar()`, `fgets()`
 - `vfprintf()`, `vprintf()`
 - `fprintf()`, `printf()`
+- `fdopen()`, `fopen()`, `fclose()`
 
 ### [`string.h`](include/string.h)
 - `strlen()`
