@@ -11,6 +11,7 @@ typedef struct FILE {
         size_t fd;
 } FILE;
 
+FILE *fdopen(int fd);
 FILE *fopen(const char *restrict path);
 int fclose(FILE *stream);
 
