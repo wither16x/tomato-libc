@@ -18,7 +18,7 @@ int fputc(int c, FILE *stream);
 int putchar(int c);
 
 int fgetc(FILE *stream);
-int getchar();
+int getchar(void);
 char *fgets(char *restrict str, int count, FILE *stream);
 
 int vfprintf(FILE *stream, const char *restrict format, va_list arg);
