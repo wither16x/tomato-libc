@@ -1,0 +1,277 @@
+#include "math.h"
+#include "stdint.h"
+#include <limits.h>
+
+/*
+        Note that I am bad at maths, and a lot of these implementations are way too
+        compilcated for me. So most of the code comes from stack overflow or blogs.
+*/
+
+#define __ABS_CORE(n)  if ((n) >= 0) return (n); return -(n)
+
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
+#define MIN(x, y) (((x) < (y)) ? (x) : (y))
+
+#ifdef __cplusplus
+extern "C"
+#endif
+
+int abs(int n)
+{
+        __ABS_CORE(n);
+}
+
+long labs(long n)
+{
+        __ABS_CORE(n);
+}
+
+long long llabs(long long n)
+{
+        __ABS_CORE(n);
+}
+
+double fabs(double x)
+{
+        union {
+                double f;
+                uint64_t i;
+        } u = {x};
+
+        u.i &= -1ull / 2;
+        return u.f;
+}
+
+double cos(double arg)
+{
+        arg = fmod(arg, 2 * pi);
+        char sign = 1;
+        if (arg > pi) {
+                arg -= pi;
+                sign = -1;
+        }
+        return sign * (1 - ((arg * arg) / (2)) + ((arg * arg * arg * arg) / (24)) - ((arg * arg * arg * arg * arg * arg) / (720)) + ((arg * arg * arg * arg * arg * arg * arg * arg) / (40320)) - ((arg * arg * arg * arg * arg * arg * arg * arg * arg * arg) / (3628800)) + ((arg * arg * arg * arg * arg * arg * arg * arg * arg * arg * arg * arg) / (479001600)));
+}
+
+double sin(double arg)
+{
+        int i = 1;
+        double curr = arg;
+        double acc = 1;
+        double fact = 1;
+        double power = arg;
+
+        while (fabs(acc) > 0.00000001 && i < 100) {
+                fact *= ((2 * i) * (2 * i + 1));
+                power *= -1 * arg * arg;
+                acc = power / fact;
+                curr += acc;
+                ++i;
+        }
+
+        return curr;
+}
+
+double tan(double arg)
+{
+        return sin(arg) / cos(arg);
+}
+
+double acos(double arg)
+{
+        double negate = (double)(arg < 0);
+        arg = fabs(arg);
+        double ret = -0.0187293;
+        ret = ret * arg + 0.0742610;
+        ret = ret * arg - 0.2121144;
+        ret = ret * arg + 1.5707288;
+        ret *= sqrt(1.0 - arg);
+        ret -= 2 * negate * ret;
+        return negate * pi + ret;
+}
+
+double asin(double arg)
+{
+        return (pi / 2) - acos(arg);
+}
+
+double atan(double arg)
+{
+        double negate = (double)(arg < 0);
+        arg = fabs(arg);
+        double invert = (double)(arg > 1);
+        if (invert)
+                arg = 1 / arg;
+
+        double ret = 0.0028662257;
+        ret = ret * arg - 0.0161657367;
+        ret = ret * arg + 0.0429096138;
+        ret = ret * arg - 0.0752896400;
+        ret = ret * arg + 0.1065626393;
+        ret = ret * arg - 0.1420889944;
+        ret = ret * arg + 0.1999355085;
+        ret = ret * arg - 0.3333314528;
+        ret = ret * arg * arg * arg + arg;
+
+        if (invert)
+                ret = (pi / 2) - ret;
+        if (negate)
+                ret = -ret;
+
+        return ret;
+}
+
+double atan2(double y, double x)
+{
+        if (x > 0)
+                return atan(y / x);
+        if (x < 0 && y >= 0)
+                return atan(y / x) + pi;
+        if (x < 0 && y < 0)
+                return atan(y / x) - pi;
+        if (x == 0 && y > 0)
+                return pi / 2;
+        if (x == 0 && y < 0)
+                return -pi / 2;
+        return 0;
+}
+
+double cosh(double arg)
+{
+        double e = exp(arg);
+        return (e + 1 / e) / 2;
+}
+
+double sinh(double arg)
+{
+        double e = exp(arg);
+        return (e - 1 / e) / 2;
+}
+
+double tanh(double arg)
+{
+        double e = exp(2 * arg);
+        return (e - 1) / (e + 1);
+}
+
+double fmod(double x, double y)
+{
+        double result = x - (double)((long long)(x / y)) * y;
+        if (result != 0 && ((result > 0) != (y < 0)))
+                result += y;
+        return result;
+}
+
+double sqrt(double arg)
+{
+        double low = MIN(1, arg);
+        double high = MAX(1, arg);
+        double mid;
+
+        while (100 * low * low < arg)
+                low *= 10;
+        while (0.01 * high * high > arg)
+                high *= 0.1;
+
+        for (int i = 0; i < 100; i++) {
+                mid = (low + high) / 2;
+                if (mid * mid == arg)
+                        return mid;
+
+                if (mid * mid > arg)
+                        high = mid;
+                else
+                        low = mid;
+        }
+
+        return mid;
+}
+
+double ceil(double arg)
+{
+        return (long)(arg + 0.99999999999999997);
+}
+
+double exp(double arg)
+{
+        int neg = 0;
+        if (arg < 0) {
+                neg = 1;
+                arg = -arg;
+        }
+
+        int n = (int)(arg / log(2));
+        double r = arg - n * log(2);
+
+        double term = 1;
+        double sum = 1;
+        for (int i = 1; i < 20; i++) {
+                term *= r / i;
+                sum += term;
+        }
+
+        while (n > 0) {
+                sum *= 2;
+                --n;
+        }
+
+        return neg ? 1 / sum : sum;
+}
+
+double log(double arg)
+{
+        if (arg <= 0) /* NaN */
+                return 0.0 / 0.0;
+
+        union {
+                double f;
+                uint64_t i;
+        } u = {arg};
+
+        int exp = (int)((u.i >> 52) & 0x7ff) - 1023;
+        u.i = (u.i & 0x000fffffffffffffull) | 0x3ff0000000000000ull;
+        double m = u.f;
+
+        double y = (m - 1) / (m + 1);
+        double y2 = y * y;
+        double term = y;
+        double sum = y;
+        for (int i = 1; i < 30; i++) {
+                term *= y2;
+                sum += term / (2 * i + 1);
+        }
+
+        return exp * 0.6931471805599453 + 2 * sum;
+}
+
+double log2(double arg)
+{
+        return log(arg) / 0.6931471805599453;
+}
+
+double log10(double arg)
+{
+        return log(arg) / 2.302585092994046;
+}
+
+double pow(double base, double e)
+{
+        if (base == 0)
+                return e == 0 ? 1 : 0;
+        return exp(e * log(base));
+}
+
+double floor(double arg)
+{
+        long long n = (long long)arg;
+        double d = (double)n;
+
+        if (d == arg || arg >= 0)
+                return d;
+        else
+                return d - 1;
+}
+
+#ifdef __cplusplus
+}
+#endif
