@@ -66,3 +66,15 @@ make # run make clean before if it does not work
 ### [`stdlib.h`](include/stdlib.h)
 - `malloc()`, `calloc()`, `realloc()`
 - `free()`
+
+### [`math.h`](include/math.h)
+- `pi`
+- `abs()`, `labs()`, `llabs()`, `fabs()`
+- `cos()`, `sin()`, `tan()`, `acos()`, `asin()`, `atan()`, `atan2()`, `cosh()`, `sinh()`, `tanh()`
+- `fmod()`
+- `sqrt()`
+- `ceil()`
+- `exp()`
+- `log()`, `log2()`, `log10()`
+- `pow()`
+- `floor()`
