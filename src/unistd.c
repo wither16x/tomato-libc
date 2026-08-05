@@ -12,6 +12,7 @@ extern "C" {
 #define RBX(x)                  "b"(x)
 #define RCX(x)                  "c"(x)
 #define RDX(x)                  "d"(x)
+#define RDI(x)                  "D"(x)
 
 enum syscall_type {
         SYS_WRITE,
@@ -23,7 +24,8 @@ enum syscall_type {
         SYS_WAIT,
         SYS_OPEN,
         SYS_CLOSE,
-        SYS_LASTPG
+        SYS_LASTPG,
+        SYS_GETCPUTIME
 };
 
 /* ------------------------------------------------------------------------------------------------- */
@@ -57,10 +59,13 @@ int read(int fd, void *buf, size_t n)
 /* ------------------------------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------------------------------- */
-int exec(const char *file)
+int exec(const char *file, int argc, char **argv, char **envp)
 {
         START_SYSCALL(SYS_EXEC)
-                RBX(file)
+                RBX(file),
+                RCX(argc),
+                RDX(argv),
+                RDI(envp)
         END_SYSCALL
 
         int ret = 0;
@@ -147,6 +152,17 @@ void *lastpg(int pages)
         END_SYSCALL
 
         void *ret = NULL;
+        GET_SYS_RETVAL(ret);
+        return ret;
+}
+/* ------------------------------------------------------------------------------------------------- */
+
+/* ------------------------------------------------------------------------------------------------- */
+int64_t getcputime(void)
+{
+        SYSCALL_NOPARAM(SYS_GETCPUTIME);
+
+        int64_t ret = 0;
         GET_SYS_RETVAL(ret);
         return ret;
 }

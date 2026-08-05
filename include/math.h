@@ -4,7 +4,7 @@
 extern "C"
 #endif
 
-#define pi      3.14159265358979
+#define PI      3.14159265358979
 
 int abs(int n);
 long labs(long n);
