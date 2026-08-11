@@ -3,6 +3,7 @@
 #include "string.h"
 #include "stdbool.h"
 #include "stdlib.h"
+#include "math.h"
 #include <stddef.h>
 
 #ifdef __cplusplus
@@ -95,6 +96,50 @@ static char *utoa(size_t n, char *buf, int base)
         return buf;
 }
 /* ------------------------------------------------------------------------------------------------- */
+
+char *ftoa(double n, char *buf)
+{
+        size_t DECIMALS = 6;
+
+        char before_point_buf[65];
+        char after_point_buf[65];
+        char padded[DECIMALS + 1];
+
+        bool negative = n < 0;
+        double abs_n = negative ? -n : n;
+
+        int64_t before_point = (int64_t)abs_n;
+        char *before_point_str = itoa(before_point, before_point_buf, 10);
+
+        double after_point_f = (abs_n - before_point) * pow(10, DECIMALS);
+        int64_t after_point = (int64_t)after_point_f;
+        char *after_point_str = itoa(after_point, after_point_buf, 10);
+
+        size_t length = strlen(after_point_str);
+        size_t padding = (length < DECIMALS) ? (DECIMALS - length) : 0;
+
+        size_t i = 0;
+        for(; i < padding; i++)
+                padded[i] = '\0';
+        strcpy(after_point_str, padded + i);
+
+        size_t pos = 0;
+        if (negative)
+                buf[pos++] = '-';
+
+        size_t bp_length = strlen(before_point_str);
+        memcpy(buf + pos, before_point_str, bp_length);
+        pos += bp_length;
+
+        buf[pos++] = '.';
+
+        memcpy(buf + pos, padded, DECIMALS);
+        pos += DECIMALS;
+
+        buf[pos] = '\0';
+
+        return buf;
+}
 
 /* ------------------------------------------------------------------------------------------------- */
 FILE *fdopen(int fd)
@@ -261,6 +306,15 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
                 case 'x': {
                         size_t n = va_arg(arg, size_t);
                         utoa(n, buf, 16);
+                        res = fprints(buf, stream);
+                        if (res < 0)
+                                return res;
+                        break;
+                }
+
+                case 'f': {
+                        double n = va_arg(arg, double);
+                        ftoa(n, buf);
                         res = fprints(buf, stream);
                         if (res < 0)
                                 return res;

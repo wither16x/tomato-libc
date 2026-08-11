@@ -31,6 +31,7 @@ make # run make clean before if it does not work
 - `exec()`, `fork()`, `exit()`, `wait()`, `getpid()`
 - `open()`, `close()`
 - `lastpg()`
+- `getcputime()`
 
 ### [`stdio.h`](include/stdio.h)
 - `fputc()`, `putchar()`
@@ -38,10 +39,14 @@ make # run make clean before if it does not work
 - `vfprintf()`, `vprintf()`
 - `fprintf()`, `printf()`
 - `fdopen()`, `fopen()`, `fclose()`
+- `fwrite()`, `fflush()`
+- `puts()`
 
 ### [`string.h`](include/string.h)
 - `strlen()`
 - `memcpy(), memset(), memmove(), memcmp()`
+- `strcmp()`, `strncmp()`
+- `strcpy()`, `strncpy()`
 
 ### [`stdarg.h`](include/stdarg.h)
 - `va_list`
@@ -66,6 +71,7 @@ make # run make clean before if it does not work
 ### [`stdlib.h`](include/stdlib.h)
 - `malloc()`, `calloc()`, `realloc()`
 - `free()`
+- `strtod()`
 
 ### [`math.h`](include/math.h)
 - `pi`
@@ -78,3 +84,10 @@ make # run make clean before if it does not work
 - `log()`, `log2()`, `log10()`
 - `pow()`
 - `floor()`
+
+## [`ctype.h`](include/ctype.h)
+- `isspace()`, `isdigit()`, `isalpha()`
+
+## [`time.h`](include/time.h)
+- `clock_t`
+- `clock()`
