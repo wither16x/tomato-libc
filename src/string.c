@@ -77,9 +77,11 @@ int memcmp(const void *s1, const void *s2, size_t n)
 /* ------------------------------------------------------------------------------------------------- */
 int strcmp(const char *lhs, const char *rhs)
 {
-        while (*lhs == *rhs && *lhs++ | *rhs++);
-        int i = *lhs - *rhs;
-        return i < 0 ? -1 : i > 0 ? 1 : 0;
+        while (*lhs && (*lhs == *rhs)) {
+                lhs++;
+                rhs++;
+        }
+        return *(unsigned char *)lhs - *(unsigned char *)rhs;
 }
 /* ------------------------------------------------------------------------------------------------- */
 
