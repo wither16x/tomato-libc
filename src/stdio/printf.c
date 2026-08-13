@@ -4,6 +4,15 @@
 #include "stdbool.h"
 #include "math.h"
 
+#define FMT_CHAR        'c'
+#define FMT_STR         's'
+#define FMT_DECIMAL     'd'
+#define FMT_BINARY      'b'
+#define FMT_OCTAL       'o'
+#define FMT_HEXADECIMAL 'x'
+#define FMT_UNSIGNED    'u'
+#define FMT_DOUBLE      'f'
+
 #ifdef __cplusplus
 extern "C"
 #endif
@@ -157,7 +166,7 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
 
                 format++;          // eat the '%'
                 switch(*format) {
-                case 'c': {
+                case FMT_CHAR: {
                         int ch = va_arg(arg, int);
                         res = fputc(ch, stream);
                         if (res < 0)
@@ -165,7 +174,7 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
                         break;
                 }
 
-                case 'b': {
+                case FMT_BINARY: {
                         size_t n = va_arg(arg, size_t);
                         char *s = utoa(n, buf, 2);
                         res = fprints(s, stream);
@@ -174,7 +183,7 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
                         break;
                 }
 
-                case 'o': {
+                case FMT_OCTAL: {
                         size_t n = va_arg(arg, size_t);
                         char *s = utoa(n, buf, 8);
                         res = fprints(s, stream);
@@ -183,7 +192,7 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
                         break;
                 }
 
-                case 'd': {
+                case FMT_DECIMAL: {
                         int n = va_arg(arg, int);
                         char *s = itoa(n, buf, 10);
                         res = fprints(s, stream);
@@ -192,7 +201,7 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
                         break;
                 }
 
-                case 'u': {
+                case FMT_UNSIGNED: {
                         size_t n = va_arg(arg, size_t);
                         char *s = utoa(n, buf, 10);
                         res = fprints(s, stream);
@@ -201,7 +210,7 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
                         break;
                 }
 
-                case 'x': {
+                case FMT_HEXADECIMAL: {
                         size_t n = va_arg(arg, size_t);
                         char *s = utoa(n, buf, 16);
                         res = fprints(s, stream);
@@ -210,7 +219,7 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
                         break;
                 }
 
-                case 'f': {
+                case FMT_DOUBLE: {
                         double n = va_arg(arg, double);
                         char *s = ftoa(n, buf);
                         res = fprints(s, stream);
@@ -219,7 +228,7 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
                         break;
                 }
 
-                case 's': {
+                case FMT_STR: {
                         const char *s = va_arg(arg, const char *);
                         res = fprints(s, stream);
                         if (res < 0)
