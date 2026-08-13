@@ -120,8 +120,9 @@ char *ftoa(double n, char *buf)
 
         size_t i = 0;
         for(; i < padding; i++)
-                padded[i] = '\0';
-        strcpy(after_point_str, padded + i);
+                padded[i] = '0';
+        memcpy(padded + i, after_point_str, length < DECIMALS ? length : DECIMALS);
+        padded[DECIMALS] = '\0';
 
         size_t pos = 0;
         if (negative)
@@ -178,7 +179,7 @@ int fclose(FILE *stream)
 size_t fwrite(const void *restrict buffer, size_t size, size_t count, FILE *restrict stream)
 {
         (void)size;
-        memcpy(stream->buf, buffer, count);
+        memcpy(stream->buf, buffer, size * count);
         return 0;
 }
 /* ------------------------------------------------------------------------------------------------- */
@@ -269,8 +270,8 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
 
                 case 'b': {
                         size_t n = va_arg(arg, size_t);
-                        utoa(n, buf, 2);
-                        res = fprints(buf, stream);
+                        char *s = utoa(n, buf, 2);
+                        res = fprints(s, stream);
                         if (res < 0)
                                 return res;
                         break;
@@ -278,8 +279,8 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
 
                 case 'o': {
                         size_t n = va_arg(arg, size_t);
-                        utoa(n, buf, 8);
-                        res = fprints(buf, stream);
+                        char *s = utoa(n, buf, 8);
+                        res = fprints(s, stream);
                         if (res < 0)
                                 return res;
                         break;
@@ -287,8 +288,8 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
 
                 case 'd': {
                         int n = va_arg(arg, int);
-                        itoa(n, buf, 10);
-                        res = fprints(buf, stream);
+                        char *s = itoa(n, buf, 10);
+                        res = fprints(s, stream);
                         if (res < 0)
                                 return res;
                         break;
@@ -296,8 +297,8 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
 
                 case 'u': {
                         size_t n = va_arg(arg, size_t);
-                        utoa(n, buf, 10);
-                        res = fprints(buf, stream);
+                        char *s = utoa(n, buf, 10);
+                        res = fprints(s, stream);
                         if (res < 0)
                                 return res;
                         break;
@@ -305,8 +306,8 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
 
                 case 'x': {
                         size_t n = va_arg(arg, size_t);
-                        utoa(n, buf, 16);
-                        res = fprints(buf, stream);
+                        char *s = utoa(n, buf, 16);
+                        res = fprints(s, stream);
                         if (res < 0)
                                 return res;
                         break;
@@ -314,8 +315,8 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
 
                 case 'f': {
                         double n = va_arg(arg, double);
-                        ftoa(n, buf);
-                        res = fprints(buf, stream);
+                        char *s = ftoa(n, buf);
+                        res = fprints(s, stream);
                         if (res < 0)
                                 return res;
                         break;
