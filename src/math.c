@@ -53,6 +53,8 @@ double fabs(double x)
 double cos(double arg)
 {
         arg = fmod(arg, 2 * PI);
+        if (arg < 0)
+                arg += 2 * PI;
         char sign = 1;
         if (arg > PI) {
                 arg -= PI;
@@ -184,16 +186,16 @@ double tanh(double arg)
 /* ------------------------------------------------------------------------------------------------- */
 double fmod(double x, double y)
 {
-        double result = x - (double)((long long)(x / y)) * y;
-        if (result != 0 && ((result > 0) != (y < 0)))
-                result += y;
-        return result;
+        return x - (double)((long long)(x / y)) * y;
 }
 /* ------------------------------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------------------------------- */
 double sqrt(double arg)
 {
+        if (arg <= 0)
+                return 0;
+
         double low = MIN(1, arg);
         double high = MAX(1, arg);
         double mid;
@@ -221,7 +223,7 @@ double sqrt(double arg)
 /* ------------------------------------------------------------------------------------------------- */
 double ceil(double arg)
 {
-        return (long)(arg + 0.99999999999999997);
+        return -floor(-arg);
 }
 /* ------------------------------------------------------------------------------------------------- */
 
