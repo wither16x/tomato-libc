@@ -1,7 +1,7 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C"
+extern "C" {
 #endif
 
 #define PI      3.14159265358979

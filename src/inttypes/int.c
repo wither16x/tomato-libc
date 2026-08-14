@@ -1,7 +1,7 @@
 #include "inttypes.h"
 
 #ifdef __cplusplus
-extern "C"
+extern "C" {
 #endif
 
 intmax_t imaxabs(intmax_t j)

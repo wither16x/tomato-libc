@@ -15,6 +15,8 @@ void free(void *ptr);
 
 double strtod(const char *str, char **str_end);
 
+void abort(void);
+
 #ifdef __cplusplus
 }
 #endif

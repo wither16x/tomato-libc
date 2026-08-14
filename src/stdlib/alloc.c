@@ -6,7 +6,7 @@
 #define __PAGE_SIZE     0x1000
 
 #ifdef __cplusplus
-extern "C"
+extern "C" {
 #endif
 
 struct heap_block {

@@ -4,7 +4,7 @@
 #define __ABS_CORE(n)  if ((n) >= 0) return (n); return -(n)
 
 #ifdef __cplusplus
-extern "C"
+extern "C" {
 #endif
 
 /* ------------------------------------------------------------------------------------------------- */

@@ -2,7 +2,7 @@
 #include "stdio.h"
 
 #ifdef __cplusplus
-extern "C"
+extern "C" {
 #endif
 
 extern void tomato_end();
