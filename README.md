@@ -23,6 +23,11 @@ make # run make clean before if it does not work
 # * ./usr/lib
 ./install.sh <directory>
 ```
+You can also skip steps 3 and 4:
+```sh
+make install
+```
+This will install everything in `$HOME/.local`.
 
 ## Headers
 ### [`unistd.h`](include/unistd.h)
