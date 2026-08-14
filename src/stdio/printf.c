@@ -41,7 +41,7 @@ static void strreverse(char *str, int length)
 /* ------------------------------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------------------------------- */
-static char *itoa(int num, char *buf, int base)
+static char *itoa(long long num, char *buf, int base)
 {
         int i = 0;
         bool is_negative = false;
@@ -58,7 +58,7 @@ static char *itoa(int num, char *buf, int base)
         }
 
         while (num != 0) {
-                int remaining = num % base;
+                long long remaining = num % base;
                 buf[i++] = (remaining > 9) ? (remaining - 10) + 'a' : remaining + '0';
                 num = num / base;
         }
@@ -75,7 +75,7 @@ static char *itoa(int num, char *buf, int base)
 /* ------------------------------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------------------------------- */
-static char *utoa(size_t n, char *buf, int base)
+static char *utoa(unsigned long long n, char *buf, int base)
 {
         if (base < 2 || base > 36) {
                 buf[0] = '\0';
@@ -154,6 +154,7 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
 {
         char buf[65];
         int res = 0;
+        int long_modifiers = 0;
 
         while (*format) {
                 if (*format != '%') {
@@ -164,8 +165,19 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
                         continue;
                 }
 
-                format++;          // eat the '%'
+                ++format;          // eat the '%'
                 switch(*format) {
+                case 'l': {
+                        ++format;
+                        if (*format == 'l') {
+                                long_modifiers = 2;
+                                ++format;
+                        } else {
+                                long_modifiers = 1;
+                        }
+                        break;
+                }
+
                 case FMT_CHAR: {
                         int ch = va_arg(arg, int);
                         res = fputc(ch, stream);
@@ -184,7 +196,9 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
                 }
 
                 case FMT_OCTAL: {
-                        size_t n = va_arg(arg, size_t);
+                        unsigned long long n = (long_modifiers == 2) ? va_arg(arg, unsigned long long)
+                                        : (long_modifiers == 1) ? va_arg(arg, unsigned long)
+                                        : va_arg(arg, unsigned int);
                         char *s = utoa(n, buf, 8);
                         res = fprints(s, stream);
                         if (res < 0)
@@ -193,7 +207,9 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
                 }
 
                 case FMT_DECIMAL: {
-                        int n = va_arg(arg, int);
+                        long long n = (long_modifiers == 2) ? va_arg(arg, long long)
+                                : (long_modifiers == 1) ? va_arg(arg, long)
+                                : va_arg(arg, int);
                         char *s = itoa(n, buf, 10);
                         res = fprints(s, stream);
                         if (res < 0)
@@ -202,7 +218,9 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
                 }
 
                 case FMT_UNSIGNED: {
-                        size_t n = va_arg(arg, size_t);
+                        unsigned long long n = (long_modifiers == 2) ? va_arg(arg, unsigned long long)
+                                        : (long_modifiers == 1) ? va_arg(arg, unsigned long)
+                                        : va_arg(arg, unsigned int);
                         char *s = utoa(n, buf, 10);
                         res = fprints(s, stream);
                         if (res < 0)
@@ -211,7 +229,9 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
                 }
 
                 case FMT_HEXADECIMAL: {
-                        size_t n = va_arg(arg, size_t);
+                        unsigned long long n = (long_modifiers == 2) ? va_arg(arg, unsigned long long)
+                                        : (long_modifiers == 1) ? va_arg(arg, unsigned long)
+                                        : va_arg(arg, unsigned int);
                         char *s = utoa(n, buf, 16);
                         res = fprints(s, stream);
                         if (res < 0)
