@@ -90,9 +90,13 @@ This will install everything in `$HOME/.local`.
 - `pow()`
 - `floor()`
 
-## [`ctype.h`](include/ctype.h)
+### [`ctype.h`](include/ctype.h)
 - `isspace()`, `isdigit()`, `isalpha()`
 
-## [`time.h`](include/time.h)
+### [`time.h`](include/time.h)
 - `clock_t`
 - `clock()`
+
+### [`assert.h`](include/assert.h)
+- `assert()`
+- `__assert_fail()`
