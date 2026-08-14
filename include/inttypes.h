@@ -2,27 +2,27 @@
 
 #include <stdint.h>
 
-#define PRIdMAX "lld"
-#define PRIiMAX "lld"
-#define PRIoMAX "llo"
-#define PRIuMAX "llu"
-#define PRIxMAX "llx"
-#define PRIXMAX "llX"
-
-#define PRId8   "hhd"
-#define PRId16  "hd"
-#define PRId32  "d"
+#define PRIdPTR "ld"
+#define PRIxPTR "lx"
+#define PRIuPTR "lu"
+#define PRIoPTR "lo"
 #define PRId64  "lld"
-
-#define PRIu8   "hhu"
-#define PRIu16  "hu"
-#define PRIu32  "u"
-#define PRIu64  "llu"
-
-#define PRIx8   "hhx"
-#define PRIx16  "hx"
-#define PRIx32  "x"
 #define PRIx64  "llx"
+#define PRIu64  "llu"
+#define PRIo64  "llo"
+#define PRId32  "d"
+#define PRIx32  "x"
+#define PRIu32  "u"
+#define PRIo32  "o"
+#define PRId16  "hd"
+#define PRIx16  "hx"
+#define PRIu16  "hu"
+#define PRId8   "hhd"
+#define PRIx8   "hhx"
+#define PRIu8   "hhu"
+#define PRIdMAX "lld"
+#define PRIxMAX "llx"
+#define PRIuMAX "llu"
 
 #ifdef __cplusplus
 extern "C" {
