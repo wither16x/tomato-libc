@@ -13,21 +13,21 @@ typedef struct FILE {
 } FILE;
 
 FILE *fdopen(int fd);
-FILE *fopen(const char *restrict path);
+FILE *fopen(const char *__restrict path);
 int fclose(FILE *stream);
-size_t fwrite( const void* restrict buffer, size_t size, size_t count, FILE* restrict stream );
+size_t fwrite( const void* __restrict buffer, size_t size, size_t count, FILE* __restrict stream );
 
 int fputc(int c, FILE *stream);
 int putchar(int c);
 
 int fgetc(FILE *stream);
 int getchar(void);
-char *fgets(char *restrict str, int count, FILE *stream);
+char *fgets(char *__restrict str, int count, FILE *stream);
 
-int vfprintf(FILE *stream, const char *restrict format, va_list arg);
-int vprintf(const char *restrict format, va_list arg);
-int fprintf(FILE *stream, const char *restrict format, ...);
-int printf(const char *restrict format, ...);
+int vfprintf(FILE *stream, const char *__restrict format, va_list arg);
+int vprintf(const char *__restrict format, va_list arg);
+int fprintf(FILE *stream, const char *__restrict format, ...);
+int printf(const char *__restrict format, ...);
 
 int fflush(FILE *stream);
 
