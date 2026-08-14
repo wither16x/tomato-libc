@@ -7,6 +7,8 @@
 extern "C" {
 #endif
 
+#define stderr stdout
+
 typedef struct FILE {
         size_t fd;
         char *buf;
