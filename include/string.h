@@ -16,7 +16,7 @@ int memcmp(const void *s1, const void *s2, size_t n);
 int strcmp(const char *lhs, const char *rhs);
 int strncmp(const char *lhs, const char *rhs, size_t count);
 char *strcpy(char *dest, const char *src);
-char* strncpy(char* restrict dest, const char* restrict src, size_t count);
+char* strncpy(char* __restrict dest, const char* __restrict src, size_t count);
 
 #ifdef __cplusplus
 }
