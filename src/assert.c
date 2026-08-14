@@ -1,6 +1,10 @@
 #include "assert.h"
 #include "stdio.h"
 
+#ifdef __cplusplus
+extern "C"
+#endif
+
 extern void tomato_end();
 
 void __assert_fail(const char *expr, const char *file, unsigned int line, const char *func)
@@ -8,3 +12,7 @@ void __assert_fail(const char *expr, const char *file, unsigned int line, const 
         printf("%s failed in %s when calling %s() at line %s\n", expr, file, func, line);
         tomato_end();
 }
+
+#ifdef __cplusplus
+}
+#endif
