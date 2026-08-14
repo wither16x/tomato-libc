@@ -100,3 +100,8 @@ This will install everything in `$HOME/.local`.
 ### [`assert.h`](include/assert.h)
 - `assert()`
 - `__assert_fail()`
+
+### [`inttypes.h`](include/inttypes.h)
+- `imaxdiv_t`
+- `imaxabs()`
+- `imaxdiv()`
