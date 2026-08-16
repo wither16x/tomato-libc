@@ -63,6 +63,17 @@ int memcmp(const void *s1, const void *s2, size_t n)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
+void *memchr(const void *s, int c, size_t n)
+{
+        const unsigned char *p = s;
+        while (n--) {
+                if (*p == (unsigned char)c)
+                        return (void *)p;
+                p++;
+        }
+        return NULL;
+}
+
 #ifdef __cplusplus
 }
 #endif

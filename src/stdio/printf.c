@@ -104,7 +104,7 @@ static char *utoa(unsigned long long n, char *buf, int base)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
-char *ftoa(double n, char *buf)
+static char *ftoa(double n, char *buf)
 {
         size_t DECIMALS = 6;
 
@@ -147,6 +147,113 @@ char *ftoa(double n, char *buf)
         buf[pos] = '\0';
 
         return buf;
+}
+
+static int format_to_buffer(char *restrict buffer, size_t n, const char *restrict format, va_list arg)
+{
+        char tmp[65];
+        size_t pos = 0;
+
+        while (*format) {
+                if (*format != '%') {
+                        if (buffer && pos + 1 < n)
+                                buffer[pos] = *format;
+                        pos++;
+                        format++;
+                        continue;
+                }
+
+                format++;
+                if (*format == '\0')
+                        break;
+
+                int long_modifiers = 0;
+                while (*format == 'l' && long_modifiers < 2) {
+                        long_modifiers++;
+                        format++;
+                }
+
+                const char *s = NULL;
+                char ch_buf[2];
+
+                switch (*format) {
+                case FMT_CHAR: {
+                        int ch = va_arg(arg, int);
+                        ch_buf[0] = (char)ch;
+                        ch_buf[1] = '\0';
+                        s = ch_buf;
+                        break;
+                }
+                case FMT_BINARY: {
+                        unsigned long long v = (long_modifiers == 2) ? va_arg(arg, unsigned long long)
+                                        : (long_modifiers == 1) ? va_arg(arg, unsigned long)
+                                        : va_arg(arg, unsigned int);
+                        s = utoa(v, tmp, 2);
+                        break;
+                }
+                case FMT_OCTAL: {
+                        unsigned long long v = (long_modifiers == 2) ? va_arg(arg, unsigned long long)
+                                        : (long_modifiers == 1) ? va_arg(arg, unsigned long)
+                                        : va_arg(arg, unsigned int);
+                        s = utoa(v, tmp, 8);
+                        break;
+                }
+                case FMT_DECIMAL: {
+                        long long v = (long_modifiers == 2) ? va_arg(arg, long long)
+                                : (long_modifiers == 1) ? va_arg(arg, long)
+                                : va_arg(arg, int);
+                        s = itoa(v, tmp, 10);
+                        break;
+                }
+                case FMT_UNSIGNED: {
+                        unsigned long long v = (long_modifiers == 2) ? va_arg(arg, unsigned long long)
+                                        : (long_modifiers == 1) ? va_arg(arg, unsigned long)
+                                        : va_arg(arg, unsigned int);
+                        s = utoa(v, tmp, 10);
+                        break;
+                }
+                case FMT_HEXADECIMAL: {
+                        unsigned long long v = (long_modifiers == 2) ? va_arg(arg, unsigned long long)
+                                        : (long_modifiers == 1) ? va_arg(arg, unsigned long)
+                                        : va_arg(arg, unsigned int);
+                        s = utoa(v, tmp, 16);
+                        break;
+                }
+                case FMT_DOUBLE: {
+                        double v = va_arg(arg, double);
+                        s = ftoa(v, tmp);
+                        break;
+                }
+                case FMT_STR: {
+                        s = va_arg(arg, const char *);
+                        break;
+                }
+                case '%': {
+                        ch_buf[0] = '%';
+                        ch_buf[1] = '\0';
+                        s = ch_buf;
+                        break;
+                }
+                default:
+                        break;
+                }
+
+                if (s) {
+                        while (*s) {
+                                if (buffer && pos + 1 < n)
+                                        buffer[pos] = *s;
+                                pos++;
+                                s++;
+                        }
+                }
+
+                format++;
+        }
+
+        if (buffer && n > 0)
+                buffer[pos < n ? pos : n - 1] = '\0';
+
+        return (int)pos;
 }
 
 /* ------------------------------------------------------------------------------------------------- */
@@ -266,6 +373,34 @@ int vfprintf(FILE *stream, const char *restrict format, va_list arg)
         return 0;
 }
 /* ------------------------------------------------------------------------------------------------- */
+
+int vsprintf(char *restrict buffer, const char *restrict format, va_list vlist)
+{
+        return format_to_buffer(buffer, (size_t)-1, format, vlist);
+}
+
+int vsnprintf(char *restrict buffer, size_t bufsz, const char *restrict format, va_list vlist)
+{
+        return format_to_buffer(buffer, bufsz, format, vlist);
+}
+
+int sprintf(char *restrict buffer, const char *restrict format, ...)
+{
+        va_list args;
+        va_start(args, format);
+        int res = vsprintf(buffer, format, args);
+        va_end(args);
+        return res;
+}
+
+int snprintf(char *restrict buffer, size_t bufsz, const char *restrict format, ...)
+{
+        va_list args;
+        va_start(args, format);
+        int res = vsnprintf(buffer, bufsz, format, args);
+        va_end(args);
+        return res;
+}
 
 /* ------------------------------------------------------------------------------------------------- */
 int vprintf(const char *restrict format, va_list arg)

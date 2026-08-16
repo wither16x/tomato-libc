@@ -25,7 +25,8 @@ enum syscall_type {
         SYS_OPEN,
         SYS_CLOSE,
         SYS_LASTPG,
-        SYS_GETCPUTIME
+        SYS_GETCPUTIME,
+        SYS_RM
 };
 
 /* ------------------------------------------------------------------------------------------------- */
@@ -119,8 +120,9 @@ int wait(void)
 /* ------------------------------------------------------------------------------------------------- */
 
 /* ------------------------------------------------------------------------------------------------- */
-int open(const char *path)
+int open(const char *path, int flags, ...)
 {
+        (void)flags;
         START_SYSCALL(SYS_OPEN)
                 RBX(path)
         END_SYSCALL
@@ -167,6 +169,17 @@ int64_t getcputime(void)
         return ret;
 }
 /* ------------------------------------------------------------------------------------------------- */
+
+int rm(const char *path)
+{
+        START_SYSCALL(SYS_RM)
+                RBX(path)
+        END_SYSCALL
+
+        int ret = 0;
+        GET_SYS_RETVAL(ret);
+        return ret;
+}
 
 #ifdef __cplusplus
 }

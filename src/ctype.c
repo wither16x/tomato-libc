@@ -25,6 +25,61 @@ int isalpha(int ch)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
+int isalnum(int ch)
+{
+        return isalpha(ch) || isdigit(ch);
+}
+
+int isupper(int ch)
+{
+        return ch >= 'A' && ch <= 'Z';
+}
+
+int islower(int ch)
+{
+        return ch >= 'a' && ch <= 'z';
+}
+
+int isxdigit(int ch)
+{
+        return isdigit(ch) || (ch >= 'a' && ch <= 'f') || (ch >= 'A' && ch <= 'F');
+}
+
+int iscntrl(int ch)
+{
+        return (ch >= 0 && ch < 0x20) || ch == 0x7f;
+}
+
+int isprint(int ch)
+{
+        return ch >= 0x20 && ch < 0x7f;
+}
+
+int isgraph(int ch)
+{
+        return isprint(ch) && ch != ' ';
+}
+
+int ispunct(int ch)
+{
+        return isprint(ch) && !isalnum(ch) && ch != ' ';
+}
+
+int isblank(int ch)
+{
+        return ch == ' ' || ch == '\t';
+}
+
+int tolower(int ch)
+{
+        return isupper(ch) ? ch + ('a' - 'A') : ch;
+}
+
+int toupper(int ch)
+{
+        return islower(ch) ? ch - ('a' - 'A') : ch;
+}
+
 #ifdef __cplusplus
 }
 #endif

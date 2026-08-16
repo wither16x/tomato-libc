@@ -7,6 +7,11 @@
 extern "C"
 #endif
 
+int fileno(FILE *stream)
+{
+        return stream->fd;
+}
+
 /* ------------------------------------------------------------------------------------------------- */
 FILE *fdopen(int fd)
 {
@@ -23,7 +28,7 @@ FILE *fdopen(int fd)
 /* ------------------------------------------------------------------------------------------------- */
 FILE *fopen(const char *restrict path)
 {
-        int fd = open(path);
+        int fd = open(path, 0);
         FILE *f = fdopen(fd);
         return f;
 }
@@ -101,6 +106,35 @@ int fflush(FILE *stream)
         return -1;
 }
 /* ------------------------------------------------------------------------------------------------- */
+
+int remove(const char *pathname)
+{
+        int result = rm(pathname);
+        return result;
+}
+
+int isatty(int fd)
+{
+        (void)fd;
+        return -1;
+}
+
+int feof(FILE *stream)
+{
+        (void)stream;
+        return -1;
+}
+
+int ferror(FILE *stream)
+{
+        (void)stream;
+        return -1;
+}
+
+int fputs(const char *restrict s, FILE *restrict stream)
+{
+        return write(fileno(stream), (const void *)s, strlen(s));
+}
 
 #ifdef __cplusplus
 }

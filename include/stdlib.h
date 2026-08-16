@@ -33,7 +33,13 @@ void *aligned_alloc(size_t alignment, size_t size);
 
 void free(void *ptr);
 
+float strtof(const char *str, char **str_end);
 double strtod(const char *str, char **str_end);
+long double strtold(const char *str, char **str_end);
+long strtol(const char *__restrict str, char **__restrict str_end, int base);
+long long strtoll(const char *__restrict str, char **__restrict str_end, int base);
+unsigned long strtoul(const char *nptr, char **endptr, int base);
+unsigned long long strtoull(const char *nptr, char **endptr, int base);
 
 void abort(void);
 
