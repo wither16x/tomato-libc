@@ -3,6 +3,7 @@
 #include "unistd.h"
 
 // The RadishOS kernel only supports 4KiB pages
+// TODO: make a sysconf syscall to get this kind of values
 #define __PAGE_SIZE     0x1000
 
 #ifdef __cplusplus
