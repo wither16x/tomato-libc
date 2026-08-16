@@ -1,8 +1,7 @@
+#include "__utils/decls.h"
 #include "inttypes.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 intmax_t imaxabs(intmax_t j)
 {
@@ -19,6 +18,4 @@ imaxdiv_t imaxdiv(intmax_t number, intmax_t demon)
         return result;
 }
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

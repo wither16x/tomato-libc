@@ -1,3 +1,4 @@
+#include "__utils/decls.h"
 #include "stdlib.h"
 #include "ctype.h"
 #include "math.h"
@@ -5,9 +6,7 @@
 #include "errno.h"
 #include <limits.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 double strtod(const char *str, char **str_end)
@@ -479,6 +478,4 @@ unsigned long long strtoull(const char *nptr, char **endptr, int base)
 	return (acc);
 }
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

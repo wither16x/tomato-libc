@@ -1,9 +1,8 @@
 #include "time.h"
+#include "__utils/decls.h"
 #include "unistd.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 clock_t clock(void)
@@ -32,6 +31,4 @@ int gettimeofday(struct timeval *restrict tv, struct timezone *restrict tz)
         return -1;
 }
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

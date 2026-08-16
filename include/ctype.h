@@ -1,8 +1,8 @@
 #pragma once
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "__utils/decls.h"
+
+BEGIN_DECLS
 
 int isspace(int ch);
 int isdigit(int ch);
@@ -19,6 +19,4 @@ int isblank(int ch);
 int tolower(int ch);
 int toupper(int ch);
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

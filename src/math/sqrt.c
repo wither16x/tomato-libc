@@ -1,11 +1,10 @@
+#include "__utils/decls.h"
 #include "math.h"
 
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 double sqrt(double arg)
@@ -37,6 +36,4 @@ double sqrt(double arg)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

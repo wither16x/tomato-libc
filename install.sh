@@ -9,4 +9,6 @@ set -e
 PREFIX="$1"
 
 cp -v sysroot/usr/include/*.h "$PREFIX"/usr/include/
+mkdir -p "$PREFIX"/usr/include/sys/
+cp -v sysroot/usr/include/sys/*.h "$PREFIX"/usr/include/sys/
 cp -v sysroot/usr/lib/* "$PREFIX"/usr/lib/

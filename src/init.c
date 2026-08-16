@@ -1,14 +1,13 @@
+#include "__utils/decls.h"
 #include "stdio.h"
 #include "unistd.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 static FILE __stdin_file;
 static FILE __stdout_file;
 FILE *stdin = &__stdin_file;
 FILE *stdout = &__stdout_file;
+
+BEGIN_DECLS
 
 void tomato_init()
 {
@@ -24,6 +23,4 @@ void tomato_end()
         exit();
 }
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

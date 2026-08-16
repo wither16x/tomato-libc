@@ -1,8 +1,7 @@
+#include "__utils/decls.h"
 #include "math.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 double fmod(double x, double y)
@@ -20,6 +19,4 @@ double pow(double base, double e)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

@@ -1,10 +1,9 @@
+#include "__utils/decls.h"
 #include "stdio.h"
 #include "string.h"
 #include "unistd.h"
 
-#ifdef __cplusplus
-extern "C"
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 int puts(const char *s)
@@ -18,6 +17,4 @@ int puts(const char *s)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

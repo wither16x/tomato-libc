@@ -1,11 +1,10 @@
+#include "__utils/decls.h"
 #include "stdio.h"
 #include "unistd.h"
 #include "stdlib.h"
 #include "string.h"
 
-#ifdef __cplusplus
-extern "C"
-#endif
+BEGIN_DECLS
 
 int fileno(FILE *stream)
 {
@@ -136,6 +135,4 @@ int fputs(const char *restrict s, FILE *restrict stream)
         return write(fileno(stream), (const void *)s, strlen(s));
 }
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

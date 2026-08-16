@@ -1,3 +1,4 @@
+#include "__utils/decls.h"
 #include "stdlib.h"
 
 #define __DIV_CORE(T, x, y) \
@@ -8,9 +9,7 @@
                 return result; \
         } while (0)
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 div_t div(int x, int y)
 {
@@ -27,6 +26,4 @@ lldiv_t lldiv(long long x, long long y)
         __DIV_CORE(lldiv_t, x, y);
 }
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

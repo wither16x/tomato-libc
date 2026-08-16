@@ -1,8 +1,7 @@
+#include "__utils/decls.h"
 #include "math.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 double ceil(double arg)
@@ -11,6 +10,4 @@ double ceil(double arg)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

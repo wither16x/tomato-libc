@@ -1,9 +1,8 @@
 #include "assert.h"
+#include "__utils/decls.h"
 #include "stdio.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 extern void tomato_end();
 
@@ -13,6 +12,4 @@ void __assert_fail(const char *expr, const char *file, unsigned int line, const 
         tomato_end();
 }
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

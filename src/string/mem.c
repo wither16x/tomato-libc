@@ -1,9 +1,8 @@
+#include "__utils/decls.h"
 #include "string.h"
 #include "stdint.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 void *memcpy(void *__restrict dest, const void *__restrict src, size_t n)
@@ -74,6 +73,4 @@ void *memchr(const void *s, int c, size_t n)
         return NULL;
 }
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

@@ -1,8 +1,7 @@
+#include "__utils/decls.h"
 #include "stdlib.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 extern void tomato_end();
 
@@ -11,6 +10,4 @@ void abort(void)
         tomato_end();
 }
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

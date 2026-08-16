@@ -1,8 +1,7 @@
+#include "__utils/decls.h"
 #include "stdlib.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 /*
         There is no shell environment for now.
@@ -13,6 +12,4 @@ char *getenv(const char *name)
         return NULL;
 }
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

@@ -2,10 +2,7 @@
 
 #include <stddef.h>
 #include <stdbool.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "__utils/decls.h"
 
 typedef struct div {
         int quot;
@@ -21,6 +18,8 @@ typedef struct lldiv {
         long long quot;
         long long rem;
 } lldiv_t;
+
+BEGIN_DECLS
 
 div_t div(int x, int y);
 ldiv_t ldiv(long x, long y);
@@ -45,6 +44,4 @@ void abort(void);
 
 char *getenv(const char *name);
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

@@ -1,11 +1,10 @@
+#include "__utils/decls.h"
 #include "math.h"
 #include "stdint.h"
 
 #define __ABS_CORE(n)  if ((n) >= 0) return (n); return -(n)
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 int abs(int n)
@@ -41,6 +40,4 @@ double fabs(double x)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

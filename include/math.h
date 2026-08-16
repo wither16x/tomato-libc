@@ -1,8 +1,6 @@
 #pragma once
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "__utils/decls.h"
 
 #define PI              3.14159265358979
 
@@ -11,6 +9,8 @@ extern "C" {
 #define FP_ZERO         2
 #define FP_SUBNORMAL    3
 #define FP_NORMAL       4
+
+BEGIN_DECLS
 
 int abs(int n);
 long labs(long n);
@@ -44,6 +44,4 @@ double pow(double base, double e);
 
 double floor(double arg);
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

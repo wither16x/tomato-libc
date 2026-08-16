@@ -1,8 +1,7 @@
+#include "__utils/decls.h"
 #include "string.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 char *strcpy(char *dest, const char *src)
@@ -44,6 +43,4 @@ char *strncpy(char *restrict dest, const char *restrict src, size_t count)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

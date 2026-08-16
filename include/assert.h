@@ -1,8 +1,8 @@
 #pragma once
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "__utils/decls.h"
+
+BEGIN_DECLS
 
 #ifdef NDEBUG
         #define assert(expr) ((void)0)
@@ -12,6 +12,4 @@ extern "C" {
                 ((expr) ? (void)0 : __assert_fail(#expr, __FILE__, __LINE__, __func__))
 #endif
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

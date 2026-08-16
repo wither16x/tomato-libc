@@ -1,8 +1,7 @@
+#include "__utils/decls.h"
 #include "math.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 double acos(double arg)
@@ -19,6 +18,4 @@ double acos(double arg)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

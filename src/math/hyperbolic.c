@@ -1,8 +1,7 @@
+#include "__utils/decls.h"
 #include "math.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 double cosh(double arg)
@@ -28,6 +27,4 @@ double tanh(double arg)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

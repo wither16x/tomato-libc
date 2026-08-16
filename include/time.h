@@ -1,10 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "__utils/decls.h"
 
 #define CLOCKS_PER_SEC          1000
 
@@ -26,11 +23,11 @@ struct timespec {
         // TODO
 };
 
+BEGIN_DECLS
+
 clock_t clock(void);
 time_t time(time_t *tloc);
 int clock_gettime(int clk_id, struct timespec *tp);
 int gettimeofday(struct timeval *__restrict tv, struct timezone *__restrict tz);
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

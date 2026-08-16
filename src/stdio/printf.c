@@ -1,3 +1,4 @@
+#include "__utils/decls.h"
 #include "stdio.h"
 #include "unistd.h"
 #include "string.h"
@@ -13,9 +14,7 @@
 #define FMT_UNSIGNED    'u'
 #define FMT_DOUBLE      'f'
 
-#ifdef __cplusplus
-extern "C"
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 static int fprints(const char *s, FILE *stream)
@@ -432,6 +431,4 @@ int printf(const char *restrict format, ...)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

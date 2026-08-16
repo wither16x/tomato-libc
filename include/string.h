@@ -1,10 +1,9 @@
 #pragma once
 
 #include <stddef.h>
+#include "__utils/decls.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 size_t strlen(const char *s);
 
@@ -21,6 +20,4 @@ char* strncpy(char* __restrict dest, const char* __restrict src, size_t count);
 
 char *strerror(int errnum);
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

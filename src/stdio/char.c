@@ -1,9 +1,8 @@
+#include "__utils/decls.h"
 #include "stdio.h"
 #include "unistd.h"
 
-#ifdef __cplusplus
-extern "C"
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 int putchar(int c)
@@ -19,6 +18,4 @@ int getchar(void)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

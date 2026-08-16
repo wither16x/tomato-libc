@@ -12,6 +12,13 @@ for file in include/*.h; do
         fi
 done
 
+mkdir -p sysroot/usr/include/sys
+for file in include/sys/*.h; do
+        if [ -f "$file" ]; then
+                cp -v "$file" "sysroot/usr/$file"
+        fi
+done
+
 mkdir -p sysroot/usr/lib
 cp -v build/crt0.o sysroot/usr/lib/crt0.o
 cp -v build/crti.o sysroot/usr/lib/crti.o

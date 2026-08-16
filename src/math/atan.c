@@ -1,8 +1,7 @@
+#include "__utils/decls.h"
 #include "math.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 double atan(double arg)
@@ -49,6 +48,4 @@ double atan2(double y, double x)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

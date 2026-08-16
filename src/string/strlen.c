@@ -1,8 +1,7 @@
+#include "__utils/decls.h"
 #include "string.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 size_t strlen(const char *s)
@@ -14,6 +13,4 @@ size_t strlen(const char *s)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

@@ -1,9 +1,8 @@
+#include "__utils/decls.h"
 #include "math.h"
 #include "stdint.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 double log(double arg)
@@ -47,6 +46,4 @@ double log10(double arg)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

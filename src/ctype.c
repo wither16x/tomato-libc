@@ -1,8 +1,7 @@
 #include "ctype.h"
+#include "__utils/decls.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 int isspace(int ch)
@@ -80,6 +79,4 @@ int toupper(int ch)
         return islower(ch) ? ch - ('a' - 'A') : ch;
 }
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

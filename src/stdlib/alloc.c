@@ -1,3 +1,4 @@
+#include "__utils/decls.h"
 #include "stdlib.h"
 #include "string.h"
 #include "unistd.h"
@@ -5,10 +6,6 @@
 // The RadishOS kernel only supports 4KiB pages
 // TODO: make a sysconf syscall to get this kind of values
 #define __PAGE_SIZE     0x1000
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 struct heap_block {
         size_t size;
@@ -18,6 +15,8 @@ struct heap_block {
 
 static struct heap_block *heap_start = NULL;
 static struct heap_block *heap_tail = NULL;
+
+BEGIN_DECLS
 
 static struct heap_block *find_free_block(size_t size)
 {
@@ -183,6 +182,4 @@ void free(void *ptr)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

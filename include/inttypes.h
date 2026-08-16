@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include "__utils/decls.h"
 
 #define PRIdPTR "ld"
 #define PRIxPTR "lx"
@@ -24,18 +25,14 @@
 #define PRIxMAX "llx"
 #define PRIuMAX "llu"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 typedef struct imaxdiv {
         intmax_t quot;
         intmax_t rem;
 } imaxdiv_t;
 
+BEGIN_DECLS
+
 intmax_t imaxabs(intmax_t j);
 imaxdiv_t imaxdiv(intmax_t number, intmax_t demon);
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

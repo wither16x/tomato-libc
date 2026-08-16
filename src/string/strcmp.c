@@ -1,8 +1,7 @@
+#include "__utils/decls.h"
 #include "string.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 int strcmp(const char *lhs, const char *rhs)
@@ -31,6 +30,4 @@ int strncmp(const char *lhs, const char *rhs, size_t count)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

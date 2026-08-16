@@ -1,19 +1,18 @@
 #pragma once
 
-#include <stdarg.h>
+#include "stdarg.h"
 #include <stddef.h>
+#include "__utils/decls.h"
 
 #define EOF             (-1)
 #define stderr          stdout
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 typedef struct FILE {
         size_t fd;
         char *buf;
 } FILE;
+
+BEGIN_DECLS
 
 int feof(FILE *stream);
 int ferror(FILE *stream);
@@ -48,9 +47,7 @@ int snprintf(char *__restrict buffer, size_t bufsz, const char *__restrict forma
 
 int isatty(int fd);
 
+END_DECLS
+
 extern FILE *stdin;
 extern FILE *stdout;
-
-#ifdef __cplusplus
-}
-#endif

@@ -1,9 +1,6 @@
 #include "unistd.h"
+#include "__utils/decls.h"
 #include <stddef.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #define GET_SYS_RETVAL(var)     __asm__ volatile ("" : "=a"(var))
 #define START_SYSCALL(n)        __asm__ volatile ( "int $0x80" :: "a"(n),
@@ -28,6 +25,8 @@ enum syscall_type {
         SYS_GETCPUTIME,
         SYS_RM
 };
+
+BEGIN_DECLS
 
 /* ------------------------------------------------------------------------------------------------- */
 int write(int fd, const void *buf, size_t n)
@@ -181,6 +180,4 @@ int rm(const char *path)
         return ret;
 }
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS

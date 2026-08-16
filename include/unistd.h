@@ -2,13 +2,11 @@
 
 #include <stdint.h>
 #include <stddef.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "__utils/decls.h"
 
 typedef size_t          pid_t;
-typedef long            ssize_t;
+
+BEGIN_DECLS
 
 int write(int fd, const void *buf, size_t n);
 int read(int fd, void *buf, size_t n);
@@ -23,6 +21,4 @@ void *lastpg(int pages);
 int64_t getcputime(void);
 int rm(const char *path);
 
-#ifdef __cplusplus
-}
-#endif
+END_DECLS
