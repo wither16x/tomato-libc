@@ -154,6 +154,21 @@ void *realloc(void *ptr, size_t new_size)
 }
 /* ------------------------------------------------------------------------------------------------- */
 
+void *aligned_alloc(size_t alignment, size_t size)
+{
+        void *p1;
+        void **p2;
+        int offset = alignment - 1 + sizeof(void *);
+
+        if ((p1 = (void *)malloc(size + offset)) == NULL)
+                return NULL;
+
+        p2 = (void *)(((size_t)(p1) + offset) & ~(alignment - 1));
+        p2[-1] = p1;
+
+        return p2;
+}
+
 /* ------------------------------------------------------------------------------------------------- */
 void free(void *ptr)
 {
