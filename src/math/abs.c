@@ -2,7 +2,7 @@
 #include "math.h"
 #include "stdint.h"
 
-#define __ABS_CORE(n)  if ((n) >= 0) return (n); return -(n)
+#define __ABS_CORE(n)   if ((n) >= 0) return (n); return -(n)
 
 BEGIN_DECLS
 

@@ -19,7 +19,7 @@ BEGIN_DECLS
 /* ------------------------------------------------------------------------------------------------- */
 static int fprints(const char *s, FILE *stream)
 {
-        return write(stream->fd, (const void *)s, strlen(s));
+        return write(fileno(stream), (const void *)s, strlen(s));
 }
 /* ------------------------------------------------------------------------------------------------- */
 
