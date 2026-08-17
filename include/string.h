@@ -20,4 +20,6 @@ char* strncpy(char* __restrict dest, const char* __restrict src, size_t count);
 
 char *strerror(int errnum);
 
+char *strcat(char *__restrict dest, const char *__restrict src);
+
 END_DECLS
