@@ -19,8 +19,8 @@ BEGIN_DECLS
 
 int feof(FILE *stream);
 int ferror(FILE *stream);
-FILE *fdopen(int fd);
-FILE *fopen(const char *__restrict path);
+FILE *fdopen(int fd, const char *modes);
+FILE *fopen(const char *__restrict path, const char *modes);
 int fclose(FILE *stream);
 size_t fwrite( const void* __restrict buffer, size_t size, size_t count, FILE* __restrict stream );
 int fileno(FILE *stream);
