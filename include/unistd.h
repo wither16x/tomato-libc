@@ -20,5 +20,6 @@ int close(int fd);
 void *lastpg(int pages);
 int64_t getcputime(void);
 int rm(const char *path);
+size_t seek(int fd, size_t pos, size_t whence);
 
 END_DECLS
