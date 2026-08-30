@@ -135,4 +135,9 @@ int fputs(const char *restrict s, FILE *restrict stream)
         return write(fileno(stream), (const void *)s, strlen(s));
 }
 
+int fseek(FILE *stream, long offset, int whence)
+{
+        return seek(fileno(stream), offset, whence);
+}
+
 END_DECLS

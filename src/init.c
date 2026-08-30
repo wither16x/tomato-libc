@@ -4,8 +4,10 @@
 
 static FILE __stdin_file;
 static FILE __stdout_file;
+
 FILE *stdin = &__stdin_file;
 FILE *stdout = &__stdout_file;
+FILE *stderr = &__stdout_file;
 
 BEGIN_DECLS
 

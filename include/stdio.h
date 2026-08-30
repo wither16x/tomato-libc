@@ -5,9 +5,12 @@
 #include "__utils/decls.h"
 
 #define EOF             (-1)
-#define stderr          stdout
+#define SEEK_SET        0
+#define SEEK_CUR        1
+#define SEEK_END        2
 
-typedef struct FILE {
+typedef struct FILE
+{
         size_t fd;
         char *buf;
 } FILE;
@@ -47,7 +50,10 @@ int snprintf(char *__restrict buffer, size_t bufsz, const char *__restrict forma
 
 int isatty(int fd);
 
+int fseek(FILE *stream, long offset, int whence);
+
 END_DECLS
 
 extern FILE *stdin;
 extern FILE *stdout;
+extern FILE *stderr;
