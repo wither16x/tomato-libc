@@ -122,7 +122,6 @@ int fputs(const char *restrict s, FILE *restrict stream)
 
 int fseek(FILE *stream, long offset, int whence)
 {
-        printf("seeking...\n");
         return seek(fileno(stream), offset, whence);
 }
 
