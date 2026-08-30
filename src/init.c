@@ -2,6 +2,9 @@
 #include "stdio.h"
 #include "unistd.h"
 
+extern void (*__init_array_start[])(void);
+extern void (*__init_array_end[])(void);
+
 static FILE __stdin_file;
 static FILE __stdout_file;
 
@@ -18,6 +21,9 @@ void tomato_init()
 
         __stdin_file.fd = stdin_fd;
         __stdout_file.fd = stdout_fd;
+
+        for (void (**fn)(void) = __init_array_start; fn != __init_array_end; ++fn)
+                (*fn)();
 }
 
 void tomato_end()

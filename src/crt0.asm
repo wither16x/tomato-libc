@@ -15,6 +15,7 @@ _start:
 
         call tomato_init
 
+; call main
         mov rdi, rbx
         mov rsi, r12
         mov rdx, r13
