@@ -4,17 +4,20 @@
 #include <stdbool.h>
 #include "__utils/decls.h"
 
-typedef struct div {
+typedef struct div
+{
         int quot;
         int rem;
 } div_t;
 
-typedef struct ldiv {
+typedef struct ldiv
+{
         long quot;
         long rem;
 } ldiv_t;
 
-typedef struct lldiv {
+typedef struct lldiv
+{
         long long quot;
         long long rem;
 } lldiv_t;
@@ -39,6 +42,8 @@ long strtol(const char *__restrict str, char **__restrict str_end, int base);
 long long strtoll(const char *__restrict str, char **__restrict str_end, int base);
 unsigned long strtoul(const char *nptr, char **endptr, int base);
 unsigned long long strtoull(const char *nptr, char **endptr, int base);
+
+int atoi(const char *str);
 
 void abort(void);
 
