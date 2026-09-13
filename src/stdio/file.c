@@ -34,7 +34,7 @@ int fclose(FILE *stream)
 {
         if (!stream)
                 return -1;
-        int result = close(stream->fd);
+        int result = close(fileno(stream));
         free(stream);
         return result;
 }
@@ -48,13 +48,13 @@ size_t fwrite(const void *restrict buffer, size_t size, size_t count, FILE *rest
 
 int fputc(int c, FILE *stream)
 {
-        return write(stream->fd, (const void *)&c, 1);
+        return write(fileno(stream), (const void *)&c, 1);
 }
 
 int fgetc(FILE *stream)
 {
         int c = 0;
-        if (read(stream->fd, &c, 1) < 0)
+        if (read(fileno(stream), &c, 1) != 0)
                 return -1;
         return c;
 }
